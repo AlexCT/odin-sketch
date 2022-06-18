@@ -2,7 +2,6 @@
 // Alex Tresselt 6-14-22
 
 // To Do:
-// Add button to erase and chose new grid size
 // Fix column div turning blue on child div mouseover
 // Add random colors
 
@@ -42,10 +41,20 @@ function drawGrid(squaresPerSide) {
 
 //Erases the grid and creates a new one with a size based on user
 // input.
-function redrawGrid(squaresPerSide) {
-    // delete old grid
-    drawGrid(squaresPerSide);
+function redrawGrid() {
+    var newSquares = prompt("Enter number of squares per side (1-100): ");
+    // Verify input
+    while (!(newSquares >= 1 && newSquares <= 100)) {
+        var newSquares = prompt("Invalid Entry! Please Select a number from 1-100: ");
+    }
+    // delete old grid, removes all child nodes from container.
+    container.innerHTML = "";
+    // draw new grid
+    drawGrid(newSquares);
 }
+
+// Redraws the page when the button is clicked.
+document.querySelector("#redrawBtn").addEventListener('click', redrawGrid);
 
 // Initialize page with a 16x16 grid
 drawGrid(16);
