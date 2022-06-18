@@ -1,10 +1,6 @@
 // The Odin Project: Etch A Sketch
 // Alex Tresselt 6-14-22
 
-// To Do:
-// Fix column div turning blue on child div mouseover
-// Add random colors
-
 // Draws the grid with the given number of squares per side.
 function drawGrid(squaresPerSide) {
 
@@ -16,23 +12,21 @@ function drawGrid(squaresPerSide) {
         // create column
         const columnDiv = document.createElement('div');
         columnDiv.classList.add('content');
-        //columnDiv.textContent = " c" + i;
         columnDiv.justifyContent = "row";
         columnDiv.style.width = size;
         columnDiv.style.height = size;
-        columnDiv.onmouseover = function() {
-            columnDiv.style.backgroundColor = "blue";
-        }
         container.appendChild(columnDiv);
+
         for (j = 0; j < squaresPerSide; j++) {
             // create row
             const rowDiv = document.createElement('div');
             rowDiv.classList.add('content');
-            //rowDiv.textContent = " r" + i;
             rowDiv.style.width = size;
             rowDiv.style.height = size;
             rowDiv.onmouseover = function() {
-                rowDiv.style.backgroundColor = "red";
+                rowDiv.style.backgroundColor = "#" 
+                + ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6);
+                // https://www.paulirish.com/2009/random-hex-color-code-snippets/ 
             }
             columnDiv.appendChild(rowDiv);
         }
